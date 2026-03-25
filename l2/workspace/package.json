@@ -1,0 +1,42 @@
+{
+  "name": "collab-projects",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "python3 scripts/build_workspace.py",
+    "start": "npm run start:dev",
+    "start:dev": "APP_ENV=development node dist/local/_102034_/l1/server/layer_1_external/transport/http/startServer.js",
+    "start:dev:db": "npm run db:init -- dev && npm run start:dev",
+    "start:staging": "APP_ENV=staging node dist/local/_102034_/l1/server/layer_1_external/transport/http/startServer.js",
+    "start:staging:db": "npm run db:init -- staging && npm run start:staging",
+    "start:prod": "APP_ENV=production node dist/local/_102034_/l1/server/layer_1_external/transport/http/startServer.js",
+    "start:prod:db": "npm run db:init -- prod && npm run start:prod",
+    "dev": "python3 scripts/build_workspace.py --watch-tsc",
+    "test": "npm run build && node --test $(find dist/local -name '*.test.js' | sort)",
+    "test:integration": "npm run build && RUN_INTEGRATION_TESTS=true node --test $(find dist/local -name '*.integration.test.js' | sort)",
+    "setup:server": "node dist/local/_102034_/l1/scripts/setupServer.js",
+    "dynamo:ensure-table": "node dist/local/_102034_/l1/scripts/ensureDynamoTable.js",
+    "db:init": "node dist/local/_102034_/l1/scripts/dbInit.js",
+    "db:migrate": "node dist/local/_102034_/l1/scripts/migrate.js",
+    "db:delete": "node dist/local/_102034_/l1/scripts/dbDelete.js",
+    "db:reset-local": "node dist/local/_102034_/l1/scripts/resetLocalDb.js",
+    "worker:write-behind": "node dist/local/_102034_/l1/scripts/runWriteBehindWorker.js",
+    "restore:from-dynamo": "node dist/local/_102034_/l1/scripts/restoreFromDynamo.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.922.0",
+    "@aws-sdk/lib-dynamodb": "^3.922.0",
+    "fastify": "^5.6.1",
+    "lit": "^3.3.2",
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.2.2",
+    "@types/node": "^24.5.2",
+    "@types/pg": "^8.18.0",
+    "esbuild": "^0.27.4",
+    "tailwindcss": "^4.2.2",
+    "typescript": "^5.9.2"
+  }
+}
