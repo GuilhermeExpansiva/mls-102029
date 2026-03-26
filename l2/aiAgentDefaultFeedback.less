@@ -1,0 +1,238 @@
+/// <mls fileReference="_102029_/l2/aiAgentDefaultFeedback.less" enhancement="enhancementStyle"/>
+
+ai-agent-default-feedback-102029 {
+
+    display: block;
+    padding: 1rem;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+
+    .feedback-section {
+        a {
+            color: @active-color;
+
+            &:hover {
+                color: @active-color-hover;
+            }
+        }
+
+        .step {
+            font-family: monospace;
+            margin: 4px 0;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -7px;
+            right: -3px;
+            background: red;
+            color: white;
+            border-radius: 50%;
+            padding: 0.1em 0.1em;
+            font-weight: bold;
+            line-height: 1;
+            min-width: 1em;
+            text-align: center;
+            font-size: 10px;
+        }
+
+        .icon {
+            position: relative;
+
+            svg {
+                height: 16px;
+                width: 16px;
+
+            }
+
+            .success {
+                fill: @success-color;
+            }
+
+            .error {
+                fill: @error-color;
+                color: @error-color;
+            }
+
+            .waiting {
+                fill: currentColor;
+            }
+
+
+            margin-left: -8px;
+
+            .play {
+                cursor: pointer;
+            }
+        }
+
+        .actions {
+            margin-left: auto;
+
+            .icon {
+                cursor: pointer;
+            }
+        }
+
+
+        .row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .title {
+            font-weight: 500;
+        }
+
+        .actions {
+            display: flex;
+            gap: .5rem;
+        }
+
+        .actions a {
+            font-size: 11px;
+            cursor: pointer;
+
+            &:not(:last-child) {
+                padding-right: .4rem;
+                border-right: 1px solid;
+            }
+        }
+
+        .details pre {
+            padding: 12px;
+            overflow: auto;
+        }
+
+        .back {
+            margin-bottom: 12px;
+        }
+
+        .log-item {
+            margin-bottom: 8px;
+        }
+    }
+
+    .progress {
+        margin: 12px 0 16px;
+        font-size: 13px;
+    }
+
+    .progress-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 6px;
+        opacity: 0.8;
+    }
+
+    .bar {
+        height: 8px;
+        background: #e5e5e5;
+        border-radius: 999px;
+        overflow: hidden;
+    }
+
+    .fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, @info-color, @success-color);
+        transition: width 350ms ease;
+        position: relative;
+    }
+
+    .fill.done {
+        background: @success-color;
+    }
+
+    /* falha */
+    .fill.failed {
+        background: @error-color
+    }
+
+    .fill:not(.failed):not(.done)::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg,
+                transparent,
+                rgba(255, 255, 255, .4),
+                transparent);
+        animation: shimmer 1.4s infinite;
+    }
+
+    @keyframes shimmer {
+        0% {
+            transform: translateX(-100%);
+        }
+
+        100% {
+            transform: translateX(100%);
+        }
+    }
+
+    .log-card {
+        border-radius: 8px;
+        padding: 10px;
+        font-size: 12px;
+
+        >div {
+            display: flex;
+            gap: .5rem;
+            align-items: center;
+        }
+
+        svg {
+            height: 16px;
+            width: 16px;
+        }
+
+        .success {
+            fill: @success-color;
+        }
+
+        .error {
+            fill: @error-color;
+            color: @error-color;
+        }
+
+    }
+
+    .log-list {
+        list-style: none;
+        padding-inline-start: 0;
+
+        pre {
+            margin-left: @space-16;
+        }
+    }
+
+    .trace-steps {
+        margin: 6px 0 0;
+        padding-left: 16px;
+
+    }
+
+    .trace-steps li {
+        margin-bottom: 4px;
+    }
+
+    .loader {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border: 2px solid #ccc;
+        border-top: 2px solid #333;
+        border-radius: 50%;
+        animation: spin 0.6s linear infinite;
+    }
+
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+}
+
+
