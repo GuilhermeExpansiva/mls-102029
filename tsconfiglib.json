@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
-        "target": "es2029",
-        "module": "ES2029",
+        "target": "es2020",
+        "module": "ES2020",
         "esModuleInterop": true,
         "outDir": "./preBuild/_102029_/",
         "rootDir": "./project/_102029_",
