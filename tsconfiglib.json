@@ -17,7 +17,7 @@
         "noImplicitAny": false,
         "strictNullChecks": false,
         "paths": {
-            "/_102020_/*": [
+            "/_102029_/*": [
                 "./project/_102029_/*"
             ],
             "/_102027_/*": [
