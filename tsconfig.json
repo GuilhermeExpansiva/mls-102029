@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "es2020",
+        "target": "es2022",
         "module": "nodenext",
         "types": ["node"],
         "esModuleInterop": true,
@@ -14,15 +14,13 @@
         "sourceMap": false,
         "declaration": false,
         "experimentalDecorators": true,
+        "useDefineForClassFields": false,
         "emitDecoratorMetadata": false,
         "noImplicitAny": false,
         "strictNullChecks": false,
         "paths": {
             "/_102029_/*": [
                 "./*"
-            ],
-            "/_102027_/*": [
-                "./node_modules/mls-102027/*"
             ]
         },
         "lib": [
@@ -33,9 +31,7 @@
     },
     "include": [
         "./l2/**/*",
-        "./l1/**/*",
-        "monaco.d.ts",
-        "mls.d.ts"
+        "./l1/**/*"
     ],
     "exclude": [
         "node_modules",

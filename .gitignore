@@ -22,3 +22,6 @@ Temporary Items
 /node_modules/
 /dist/
 package-lock.json
+*.js
+*.mjs
+
