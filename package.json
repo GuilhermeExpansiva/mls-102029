@@ -2,6 +2,7 @@
   "name": "102029",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node -e \"require('mls-ci').runDownload()\"; tsc -p ./tsconfig.json",
