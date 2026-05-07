@@ -1,5 +1,8 @@
 /// <mls fileReference="_102029_/l2/bffClient.ts" enhancement="_blank" />
 import type { AuraInteractionMode, AuraNormalizedError } from '/_102029_/l2/contracts/bootstrap.js';
+import { telemetryQueue, type ClientTelemetryEvent } from '/_102029_/l2/telemetry.js';
+
+export type { ClientTelemetryEvent };
 
 function traceLazy(event: string, details?: Record<string, unknown>) {
   if (!globalThis.window || !window.isTraceLazy) {
@@ -18,6 +21,18 @@ export interface BffClientResponse<TData = unknown> {
   ok: boolean;
   data: TData | null;
   error: AuraNormalizedError | null;
+  telemetryReceived?: number;
+}
+
+let _userId = 'anonymous';
+
+export function setUserId(id: string): void {
+  _userId = id;
+  telemetryQueue.setUserId(id);
+}
+
+export function pushTelemetry(event: ClientTelemetryEvent): void {
+  telemetryQueue.push(event);
 }
 
 const DEFAULT_TIMEOUT_MS = 10000;
@@ -52,6 +67,8 @@ export async function execBff<TData = unknown>(
         params,
         meta: {
           source: 'http',
+          userId: _userId,
+          telemetry: telemetryQueue.flush(),
         },
       }),
       signal,
