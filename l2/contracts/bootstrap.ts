@@ -1,9 +1,27 @@
 /// <mls fileReference="_102029_/l2/contracts/bootstrap.ts" enhancement="_blank" />
+
 export type AuraShellMode = 'spa' | 'pwa';
 
 export type AuraDeviceKind = 'desktop' | 'mobile';
 
 export type AuraAsideMode = 'inline' | 'drawer' | 'fullscreen';
+
+export type AuraGenomeLayout = 'standart' | 'tabs' | 'compact' | 'aside' | 'bento-grids'
+
+export type AuraDesignSystem = 'default' | string
+
+export interface IPaths {
+  webSharedPath: string,
+  webSharedSkill: string
+}
+
+export interface IGenomeConfig {
+  device: AuraDeviceKind,
+  designSystem: AuraDesignSystem,
+  designSystemSkill: string,
+  layout: AuraGenomeLayout,
+  layoutSkill: string
+}
 
 export interface AuraRegionVisibility {
   header: boolean;
