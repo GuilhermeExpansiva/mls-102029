@@ -10,10 +10,14 @@ export type AuraGenomeLayout = 'standart' | 'tabs' | 'compact' | 'aside' | 'bent
 
 export type AuraDesignSystem = 'default' | string
 
-export interface IPaths {
-  webSharedPath: string,
-  webSharedSkill: string
+export type Platform = "web" | "mobile"
+
+export type PathConfig = {
+  sharedPath: string
+  sharedSkill: string
 }
+
+export type IPaths = Partial<Record<Platform, PathConfig>>
 
 export interface IGenomeConfig {
   device: AuraDeviceKind,
