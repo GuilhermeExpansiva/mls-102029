@@ -6,10 +6,6 @@ export type AuraDeviceKind = 'desktop' | 'mobile';
 
 export type AuraAsideMode = 'inline' | 'drawer' | 'fullscreen';
 
-export type AuraGenomeLayout = 'standart' | 'tabs' | 'compact' | 'aside' | 'bento-grids'
-
-export type AuraDesignSystem = 'default' | string
-
 export type Platform = "web" | "mobile"
 
 export type PathConfig = {
@@ -21,10 +17,8 @@ export type IPaths = Partial<Record<Platform, PathConfig>>
 
 export interface IGenomeConfig {
   device: AuraDeviceKind,
-  designSystem: AuraDesignSystem,
-  designSystemSkill: string,
-  layout: AuraGenomeLayout,
-  layoutSkill: string
+  designSystem: string,
+  layout: string,
 }
 
 export interface AuraRegionVisibility {
