@@ -8,14 +8,14 @@ export type AuraAsideMode = 'inline' | 'drawer' | 'fullscreen';
 
 export type Platform = "web" | "mobile";
 
-export type ISkillConfig = "layer1" | "layer2" | "layer3" | "layer4"
+export type ISkillConfig = "layer1" | "layer2" | "layer3" | "layer4" | "contract"
 
 export type PathConfig = {
   sharedPath: string
   sharedSkill: string
 }
 
-export type ISkill = Partial<Record<ISkillConfig, {skillPath:string}>>
+export type ISkill = Partial<Record<ISkillConfig, {skillPath:string[]}>>
 
 export type IPaths = Partial<Record<Platform, PathConfig>>
 
