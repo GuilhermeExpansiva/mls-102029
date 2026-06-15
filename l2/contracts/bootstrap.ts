@@ -8,7 +8,7 @@ export type AuraAsideMode = 'inline' | 'drawer' | 'fullscreen';
 
 export type Platform = "web" | "mobile";
 
-export type ISkillConfig = "layer1" | "layer2" | "layer3" | "layer4" | "contract"
+export type ISkillConfig = "layer1" | "layer2" | "layer3" | "layer4" | "contract" | "architecture" | "definition";
 
 export type PathConfig = {
   sharedPath: string
