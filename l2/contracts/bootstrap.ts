@@ -6,12 +6,16 @@ export type AuraDeviceKind = 'desktop' | 'mobile';
 
 export type AuraAsideMode = 'inline' | 'drawer' | 'fullscreen';
 
-export type Platform = "web" | "mobile"
+export type Platform = "web" | "mobile";
+
+export type ISkillConfig = "layer1" | "layer2" | "layer3" | "layer4" | "contract" | "architecture" | "definition";
 
 export type PathConfig = {
   sharedPath: string
   sharedSkill: string
 }
+
+export type ISkill = Partial<Record<ISkillConfig, {skillPath:string[]}>>
 
 export type IPaths = Partial<Record<Platform, PathConfig>>
 
