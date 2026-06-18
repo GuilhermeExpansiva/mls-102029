@@ -6,12 +6,16 @@ export type AuraDeviceKind = 'desktop' | 'mobile';
 
 export type AuraAsideMode = 'inline' | 'drawer' | 'fullscreen';
 
-export type Platform = "web" | "mobile"
+export type Platform = "web" | "mobile";
+
+export type ISkillConfig = "layer1" | "layer2" | "layer3" | "layer4" | "contract" | "architecture" | "definition";
 
 export type PathConfig = {
   sharedPath: string
   sharedSkill: string
 }
+
+export type ISkill = Partial<Record<ISkillConfig, {skillPath:string[]}>>
 
 export type IPaths = Partial<Record<Platform, PathConfig>>
 
@@ -27,6 +31,8 @@ export interface AuraRegionVisibility {
   content: boolean;
 }
 
+export type AuraRegionName = 'header' | 'aside' | 'content';
+
 export interface AuraLayoutConfig {
   regions: {
     desktop: AuraRegionVisibility;
@@ -36,11 +42,43 @@ export interface AuraLayoutConfig {
     desktop: AuraAsideMode;
     mobile: AuraAsideMode;
   };
+  asideSize?: {
+    desktopWidthPx?: number;
+    drawerWidthPx?: number;
+  };
 }
 
 export interface AuraRegionRendererConfig {
   entrypoint: string;
   tag: string;
+}
+
+export interface AuraDynamicRegionConfig {
+  renderer: AuraRegionRendererConfig;
+  widthPx?: number;
+  source?: string;
+  switchWithoutRouteReload?: boolean;
+  props?: Record<string, unknown>;
+  brand?: Record<string, unknown>;
+  component?: string;
+  appsMenuSource?: string;
+  [key: string]: unknown;
+}
+
+export interface AuraShellRegionProfiles {
+  activeProfile: string;
+  switchWithoutRouteReload?: boolean;
+  profiles: Record<string, AuraDynamicRegionConfig>;
+}
+
+export interface AuraClientShellConfig {
+  mode: AuraShellMode;
+  activeProfile?: string;
+  runtimeControls?: Record<string, string>;
+  regions: {
+    header?: AuraShellRegionProfiles;
+    aside?: AuraShellRegionProfiles;
+  };
 }
 
 export type AuraRouteMatchMode = 'exact' | 'prefix';
@@ -91,6 +129,7 @@ export interface AuraBootConfig {
   navigation?: AuraNavigationItem[];
   moduleLinks?: AuraNavigationItem[];
   layout: AuraLayoutConfig;
+  clientShell?: AuraClientShellConfig;
 }
 
 export type AuraInteractionMode = 'blocking' | 'silent';
@@ -122,6 +161,9 @@ declare global {
       toggleAside: () => void;
       openAside: () => void;
       closeAside: () => void;
+      setHeaderRenderer: (renderer: AuraRegionRendererConfig, props?: Record<string, unknown>) => Promise<void>;
+      setAsideRenderer: (renderer: AuraRegionRendererConfig, props?: Record<string, unknown>) => Promise<void>;
+      setShellProfile: (profileName: string) => Promise<void>;
     };
   }
 

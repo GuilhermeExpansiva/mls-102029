@@ -1,6 +1,5 @@
 /// <mls fileReference="_102029_/l2/collabState.ts" enhancement="_blank"/>
 
-
 /**
  * Returns the value for a given state key.
  * @param key State key in dot notation.
@@ -104,8 +103,13 @@ export const globalState: {
 } = {} as any;
 
 function getCollabWindow(): any {
-  if (window.parent && window.parent !== window && (window.parent as any).globalStateManagment) {
-    return window.parent;
+  try {
+    if (window.parent && window.parent !== window && (window.parent as any).globalStateManagment) {
+      return window.parent;
+    }
+  } catch (e) {
+    // Cross-origin access to the parent (isolated preview on an opaque origin)
+    // throws SecurityError — in that case the iframe uses its own window (local state).
   }
   return window;
 }
@@ -401,6 +405,7 @@ class CollabStateSingleton implements CollabState {
 
     this.isNotifying = true;
     let nextKey: string = "";
+
     try {
       while (this.notifyQueue.length > 0) {
         nextKey = this.notifyQueue.shift()!;
