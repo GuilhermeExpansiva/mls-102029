@@ -153,8 +153,7 @@ export function propertyDataSource(options?: PropertyDeclaration) {
         return attributeValue;
       },
       set(value: any) {
-
-
+        const oldValue = this[`_${attributeName}`];
 
         if (options?.type === Number && typeof value === 'number' && isNaN(value)) {
           // ignore , lit sent ex "{{users.name}}" after requestUpdate
@@ -174,7 +173,7 @@ export function propertyDataSource(options?: PropertyDeclaration) {
           } else {
             this[`_${attributeName}`] = value;
           }
-          this.requestUpdate();
+          this.requestUpdate(String(propName), oldValue);
           return;
         }
 
@@ -196,7 +195,7 @@ export function propertyDataSource(options?: PropertyDeclaration) {
           } else {
             this[`_${attributeName}`] = value;
           }
-          this.requestUpdate();
+          this.requestUpdate(String(propName), oldValue);
           return;
         }
 
@@ -228,7 +227,7 @@ export function propertyDataSource(options?: PropertyDeclaration) {
           }
           else this[`_${attributeName}`] = value;
         }
-        this.requestUpdate();
+        this.requestUpdate(String(propName), oldValue);
       }
     });
 
