@@ -1,5 +1,5 @@
 /// <mls fileReference="_102029_/l2/bffClient.ts" enhancement="_blank" />
-import type { AuraInteractionMode, AuraNormalizedError } from '/_102029_/l2/contracts/bootstrap.js';
+import type { MasterFrontendInteractionMode, MasterFrontendNormalizedError } from '/_102029_/l2/contracts/bootstrap.js';
 import { telemetryQueue, type ClientTelemetryEvent } from '/_102029_/l2/telemetry.js';
 
 export type { ClientTelemetryEvent };
@@ -12,7 +12,7 @@ function traceLazy(event: string, details?: Record<string, unknown>) {
 }
 
 export interface BffClientOptions {
-  mode?: AuraInteractionMode;
+  mode?: MasterFrontendInteractionMode;
   timeoutMs?: number;
   signal?: AbortSignal;
 }
@@ -20,7 +20,7 @@ export interface BffClientOptions {
 export interface BffClientResponse<TData = unknown> {
   ok: boolean;
   data: TData | null;
-  error: AuraNormalizedError | null;
+  error: MasterFrontendNormalizedError | null;
   telemetryReceived?: number;
 }
 

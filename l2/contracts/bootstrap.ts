@@ -1,10 +1,10 @@
 /// <mls fileReference="_102029_/l2/contracts/bootstrap.ts" enhancement="_blank" />
 
-export type AuraShellMode = 'spa' | 'pwa';
+export type MasterFrontendShellMode = 'spa' | 'pwa';
 
-export type AuraDeviceKind = 'desktop' | 'mobile';
+export type MasterFrontendDeviceKind = 'desktop' | 'mobile';
 
-export type AuraAsideMode = 'inline' | 'drawer' | 'fullscreen';
+export type MasterFrontendAsideMode = 'inline' | 'drawer' | 'fullscreen';
 
 export type Platform = "web" | "mobile";
 
@@ -20,27 +20,27 @@ export type ISkill = Partial<Record<ISkillConfig, {skillPath:string[]}>>
 export type IPaths = Partial<Record<Platform, PathConfig>>
 
 export interface IGenomeConfig {
-  device: AuraDeviceKind,
+  device: MasterFrontendDeviceKind,
   designSystem: string,
   layout: string,
 }
 
-export interface AuraRegionVisibility {
+export interface MasterFrontendRegionVisibility {
   header: boolean;
   aside: boolean;
   content: boolean;
 }
 
-export type AuraRegionName = 'header' | 'aside' | 'content';
+export type MasterFrontendRegionName = 'header' | 'aside' | 'content';
 
-export interface AuraLayoutConfig {
+export interface MasterFrontendLayoutConfig {
   regions: {
-    desktop: AuraRegionVisibility;
-    mobile: AuraRegionVisibility;
+    desktop: MasterFrontendRegionVisibility;
+    mobile: MasterFrontendRegionVisibility;
   };
   asideMode: {
-    desktop: AuraAsideMode;
-    mobile: AuraAsideMode;
+    desktop: MasterFrontendAsideMode;
+    mobile: MasterFrontendAsideMode;
   };
   asideSize?: {
     desktopWidthPx?: number;
@@ -48,13 +48,13 @@ export interface AuraLayoutConfig {
   };
 }
 
-export interface AuraRegionRendererConfig {
+export interface MasterFrontendRegionRendererConfig {
   entrypoint: string;
   tag: string;
 }
 
-export interface AuraDynamicRegionConfig {
-  renderer: AuraRegionRendererConfig;
+export interface MasterFrontendDynamicRegionConfig {
+  renderer: MasterFrontendRegionRendererConfig;
   widthPx?: number;
   source?: string;
   switchWithoutRouteReload?: boolean;
@@ -65,25 +65,25 @@ export interface AuraDynamicRegionConfig {
   [key: string]: unknown;
 }
 
-export interface AuraShellRegionProfiles {
+export interface MasterFrontendShellRegionProfiles {
   activeProfile: string;
   switchWithoutRouteReload?: boolean;
-  profiles: Record<string, AuraDynamicRegionConfig>;
+  profiles: Record<string, MasterFrontendDynamicRegionConfig>;
 }
 
-export interface AuraClientShellConfig {
-  mode: AuraShellMode;
+export interface MasterFrontendClientShellConfig {
+  mode: MasterFrontendShellMode;
   activeProfile?: string;
   runtimeControls?: Record<string, string>;
   regions: {
-    header?: AuraShellRegionProfiles;
-    aside?: AuraShellRegionProfiles;
+    header?: MasterFrontendShellRegionProfiles;
+    aside?: MasterFrontendShellRegionProfiles;
   };
 }
 
-export type AuraRouteMatchMode = 'exact' | 'prefix';
+export type MasterFrontendRouteMatchMode = 'exact' | 'prefix';
 
-export interface AuraRouteDefinition {
+export interface MasterFrontendRouteDefinition {
   path: string;
   entrypoint: string;
   tag: string;
@@ -91,87 +91,87 @@ export interface AuraRouteDefinition {
   aliases?: string[];
   loadingKey?: string;
   preload?: boolean;
-  matchMode?: AuraRouteMatchMode;
+  matchMode?: MasterFrontendRouteMatchMode;
 }
 
-export interface AuraModuleFrontendDefinition {
+export interface MasterFrontendModuleFrontendDefinition {
   pageTitle?: string;
-  device?: AuraDeviceKind;
-  navigation?: AuraNavigationItem[];
-  routes: AuraRouteDefinition[];
-  headerRenderer?: AuraRegionRendererConfig;
-  asideRenderer?: AuraRegionRendererConfig;
+  device?: MasterFrontendDeviceKind;
+  navigation?: MasterFrontendNavigationItem[];
+  routes: MasterFrontendRouteDefinition[];
+  headerRenderer?: MasterFrontendRegionRendererConfig;
+  asideRenderer?: MasterFrontendRegionRendererConfig;
 }
 
-export interface AuraNavigationItem {
+export interface MasterFrontendNavigationItem {
   id: string;
   label: string;
   href: string;
   description?: string;
 }
 
-export interface AuraModuleShellPreferences {
-  layout?: Partial<AuraLayoutConfig>;
+export interface MasterFrontendModuleShellPreferences {
+  layout?: Partial<MasterFrontendLayoutConfig>;
 }
 
-export interface AuraBootConfig {
+export interface MasterFrontendBootConfig {
   projectId: string;
   moduleId: string;
   basePath: string;
-  shellMode: AuraShellMode;
-  device: AuraDeviceKind;
-  routes: AuraRouteDefinition[];
+  shellMode: MasterFrontendShellMode;
+  device: MasterFrontendDeviceKind;
+  routes: MasterFrontendRouteDefinition[];
   headerEntrypoint?: string;
   headerTag?: string;
   asideEntrypoint?: string;
   asideTag?: string;
   pageTitle?: string;
-  navigation?: AuraNavigationItem[];
-  moduleLinks?: AuraNavigationItem[];
-  layout: AuraLayoutConfig;
-  clientShell?: AuraClientShellConfig;
+  navigation?: MasterFrontendNavigationItem[];
+  moduleLinks?: MasterFrontendNavigationItem[];
+  layout: MasterFrontendLayoutConfig;
+  clientShell?: MasterFrontendClientShellConfig;
 }
 
-export type AuraInteractionMode = 'blocking' | 'silent';
-export type AuraBusyPhase = 'idle' | 'subtle' | 'dimmed';
+export type MasterFrontendInteractionMode = 'blocking' | 'silent';
+export type MasterFrontendBusyPhase = 'idle' | 'subtle' | 'dimmed';
 
-export interface AuraNormalizedError {
+export interface MasterFrontendNormalizedError {
   code: string;
   message: string;
   details?: unknown;
 }
 
-export interface AuraBlockingErrorState {
+export interface MasterFrontendBlockingErrorState {
   title: string;
-  error: AuraNormalizedError;
+  error: MasterFrontendNormalizedError;
   canRetry: boolean;
 }
 
-export interface AuraInteractionState {
+export interface MasterFrontendInteractionState {
   busy: boolean;
-  busyPhase: AuraBusyPhase;
+  busyPhase: MasterFrontendBusyPhase;
   busyLabel?: string;
   clearContentWhileBusy: boolean;
-  blockingError?: AuraBlockingErrorState;
+  blockingError?: MasterFrontendBlockingErrorState;
 }
 
 declare global {
   interface Window {
-    collabAuraShellControls?: {
+    collabMasterFrontendShellControls?: {
       toggleAside: () => void;
       openAside: () => void;
       closeAside: () => void;
-      setHeaderRenderer: (renderer: AuraRegionRendererConfig, props?: Record<string, unknown>) => Promise<void>;
-      setAsideRenderer: (renderer: AuraRegionRendererConfig, props?: Record<string, unknown>) => Promise<void>;
+      setHeaderRenderer: (renderer: MasterFrontendRegionRendererConfig, props?: Record<string, unknown>) => Promise<void>;
+      setAsideRenderer: (renderer: MasterFrontendRegionRendererConfig, props?: Record<string, unknown>) => Promise<void>;
       setShellProfile: (profileName: string) => Promise<void>;
     };
   }
 
   interface Window {
-    collabBoot?: AuraBootConfig;
+    collabBoot?: MasterFrontendBootConfig;
     collabRouteChunkCache?: Set<string>;
     collabRouteChunkPromises?: Map<string, Promise<unknown>>;
-    collabAuraInteractionState?: AuraInteractionState;
+    collabMasterFrontendInteractionState?: MasterFrontendInteractionState;
     isTraceLazy?: boolean;
   }
 }

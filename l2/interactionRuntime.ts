@@ -1,9 +1,9 @@
 /// <mls fileReference="_102029_/l2/interactionRuntime.ts" enhancement="_blank" />
 import type {
-  AuraBlockingErrorState,
-  AuraInteractionMode,
-  AuraInteractionState,
-  AuraNormalizedError,
+  MasterFrontendBlockingErrorState,
+  MasterFrontendInteractionMode,
+  MasterFrontendInteractionState,
+  MasterFrontendNormalizedError,
 } from '/_102029_/l2/contracts/bootstrap.js';
 
 const DIMMED_DELAY_MS = 600;
@@ -16,10 +16,10 @@ function traceLazy(event: string, details?: Record<string, unknown>) {
   console.log('[traceLazy][interaction]', event, details ?? {});
 }
 
-type InteractionListener = (state: AuraInteractionState) => void;
+type InteractionListener = (state: MasterFrontendInteractionState) => void;
 
 interface BlockingActionOptions {
-  mode?: AuraInteractionMode;
+  mode?: MasterFrontendInteractionMode;
   timeoutMs?: number;
   clearContentWhileBusy?: boolean;
   busyLabel?: string;
@@ -36,7 +36,7 @@ interface PendingNavigationLoad {
 }
 
 const listeners = new Set<InteractionListener>();
-let currentState: AuraInteractionState = {
+let currentState: MasterFrontendInteractionState = {
   busy: false,
   busyPhase: 'idle',
   clearContentWhileBusy: false,
@@ -59,12 +59,12 @@ function createDeferred() {
 
 function emitState() {
   if (globalThis.window) {
-    window.collabAuraInteractionState = currentState;
+    window.collabMasterFrontendInteractionState = currentState;
   }
   listeners.forEach((listener) => listener(currentState));
 }
 
-function setState(nextState: AuraInteractionState) {
+function setState(nextState: MasterFrontendInteractionState) {
   currentState = nextState;
   emitState();
 }
@@ -80,8 +80,8 @@ function clearTimers() {
   }
 }
 
-function publishBlockingError(error: AuraNormalizedError, options: BlockingActionOptions) {
-  const blockingError: AuraBlockingErrorState = {
+function publishBlockingError(error: MasterFrontendNormalizedError, options: BlockingActionOptions) {
+  const blockingError: MasterFrontendBlockingErrorState = {
     title: options.errorTitle ?? 'Nao foi possivel carregar esta pagina',
     error,
     canRetry: typeof options.retry === 'function',
@@ -118,7 +118,7 @@ export function clearBlockingError() {
   });
 }
 
-export function normalizeInteractionError(error: unknown): AuraNormalizedError {
+export function normalizeInteractionError(error: unknown): MasterFrontendNormalizedError {
   if (error && typeof error === 'object' && 'code' in error && 'message' in error) {
     const candidate = error as { code: unknown; message: unknown; details?: unknown };
     if (typeof candidate.code === 'string' && typeof candidate.message === 'string') {

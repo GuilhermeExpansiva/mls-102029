@@ -12,7 +12,7 @@ export function createRuntimeUuid(): string {
 }
 
 export function fillRandomBytes(bytes: Uint8Array): Uint8Array {
-  getCrypto().getRandomValues(bytes);
+  getCrypto().getRandomValues(bytes as any);
   return bytes;
 }
 
