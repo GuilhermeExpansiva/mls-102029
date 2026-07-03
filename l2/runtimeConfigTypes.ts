@@ -231,6 +231,7 @@ export const L4_CONTEXT_ORIGIN_CATALOG = {
 
 export interface L4ContextResolution {
   inputId?: string;
+  /** Entity.field, input.<inputId>, filter.<name>, or a catalogued runtime context attribute. */
   targetRef: string;
   source: L4ContextSource;
   originRef: string;
