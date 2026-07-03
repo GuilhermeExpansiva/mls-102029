@@ -209,3 +209,56 @@ export interface L5ProjectJson {
   dependencies?: L5Dependency[];
   customize?: L5RuntimeCustomize;
 }
+
+// ── L4 context-resolution contract ──────────────────────────────────────────
+
+export type L4ContextSource =
+  | 'userInput'
+  | 'actorSession'
+  | 'currentWorkspace'
+  | 'selectedEntity'
+  | 'activeLifecycleInstance'
+  | 'workflowState'
+  | 'routeParam'
+  | 'previousStepOutput'
+  | 'systemDefault';
+
+export const L4_CONTEXT_ORIGIN_CATALOG = {
+  actorSession: ['actorSession.actorId', 'actorSession.scope'],
+  currentWorkspace: ['currentWorkspace.workspaceId'],
+  systemDefault: ['systemDefault.now', 'systemDefault.uuid', 'systemDefault.locale'],
+} as const;
+
+export interface L4ContextResolution {
+  inputId?: string;
+  targetRef: string;
+  source: L4ContextSource;
+  originRef: string;
+  description: string;
+}
+
+// ── L5 generation todo contract ─────────────────────────────────────────────
+
+export type L5GenerationTodoLayer = 'frontend' | 'backend';
+export type L5GenerationTodoStatus = 'toCreate' | 'toUpdate' | 'toRemove' | 'inProgress' | 'done';
+export type L5GenerationTodoOwnerType = 'workflow' | 'operation';
+
+export interface L5GenerationTodoOwner {
+  ownerType: L5GenerationTodoOwnerType;
+  ownerId: string;
+  title: string;
+  status: L5GenerationTodoStatus;
+  defPath: string;
+  pageId?: string;
+  commandName?: string;
+  bffName?: string;
+  capabilityId?: string;
+}
+
+export interface L5GenerationTodo {
+  schemaVersion: string;
+  moduleName: string;
+  layer: L5GenerationTodoLayer;
+  updatedAt: string;
+  owners: L5GenerationTodoOwner[];
+}
