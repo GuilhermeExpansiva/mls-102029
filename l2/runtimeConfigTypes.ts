@@ -106,8 +106,18 @@ export interface ProjectConfigRecord {
   root: string;
   type?: ProjectType;
   role?: string;
+  runtime?: ProjectRuntimeMetadata;
   modules?: ProjectModuleConfig[];
   persistenceModules?: ProjectPersistenceModuleConfig[];
+}
+
+export interface ProjectRuntimeMetadata {
+  projectId?: string;
+  domain?: string;
+  port?: number;
+  databaseName?: string;
+  environment?: string;
+  studioEnabled?: boolean;
 }
 
 export interface PublicationTargetConfig {
@@ -196,6 +206,12 @@ export interface L5RuntimeCustomize {
 }
 
 export interface L5ProjectJson {
+  projectId?: string;
+  domain?: string;
+  port?: number;
+  databaseName?: string;
+  environment?: string;
+  studioEnabled?: boolean;
   orgName?: string;
   designSystems?: Array<Record<string, unknown>>;
   languages?: L5Language[];
@@ -215,6 +231,7 @@ export interface L5ProjectJson {
 export type L4ContextSource =
   | 'userInput'
   | 'actorSession'
+  | 'businessContext'
   | 'currentWorkspace'
   | 'selectedEntity'
   | 'activeLifecycleInstance'
@@ -225,6 +242,7 @@ export type L4ContextSource =
 
 export const L4_CONTEXT_ORIGIN_CATALOG = {
   actorSession: ['actorSession.actorId', 'actorSession.scope'],
+  businessContext: ['businessContext.activeCompanyId', 'businessContext.activeUnitId'],
   currentWorkspace: ['currentWorkspace.workspaceId'],
   systemDefault: ['systemDefault.now', 'systemDefault.uuid', 'systemDefault.locale'],
 } as const;
